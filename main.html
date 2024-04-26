@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Адаптивное меню</title>
+<style>
+.submenu {
+    position: relative;
+    display: inline-block;
+}
+
+.submenu ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    padding: 0;
+}
+
+.submenu ul li {
+    display: block;
+}
+
+.submenu ul li a {
+    color: black;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+.menu-trigger {
+    display: none; /* Скрываем кнопку на десктопе */
+}
+
+@media only screen and (max-width: 768px) {
+    .menu-trigger {
+        display: block; /* Показываем кнопку на мобильных устройствах */
+    }
+    .nav {
+        display: none; /* Скрываем основное меню на мобильных устройствах */
+    }
+}
+</style>
+</head>
+<body>
+
+<nav class="main-nav">
+    <!-- ***** Logo Start ***** -->
+    <a href="index.html" class="logo">
+        <h4>
+            <span style="color: black;">Boto</span>
+        </h4>
+    </a>
+    <!-- ***** Logo End ***** -->
+
+    <!-- ***** Menu Start ***** -->
+    <ul class="nav">
+        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
+        <li class="scroll-to-section"><a href="#about">Deutschkurs</a></li>
+        <li class="scroll-to-section"><a href="#portfolio">Programme</a></li>
+        <li class="scroll-to-section"><a href="#services">Uber uns</a></li>
+        <li class="scroll-to-section"><a href="#blog">Blog</a></li> 
+        <li class="scroll-to-section"><a href="#contact">Kontakt</a></li>   
+        <li class="submenu">
+            <a href="#" class="menuToggle"><span>Deutsch</span></a>
+            <ul class="submenu-content">
+                <li><a href="about.html">Кыргызча</a></li>
+                <li><a href="products.html">Русский</a></li>  
+            </ul>
+        </li>
+        <li class="scroll-to-section"></li> 
+    </ul>    
+
+    <a class='menu-trigger'>
+        <span>Menu</span>
+    </a>
+    <!-- ***** Menu End ***** -->
+</nav>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var menuToggles = document.querySelectorAll('.submenu .menuToggle');
+    var menuTrigger = document.querySelector('.menu-trigger');
+    var nav = document.querySelector('.nav');
+    
+    menuToggles.forEach(function(menuToggle) {
+        var submenu = menuToggle.nextElementSibling;
+
+        menuToggle.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                submenu.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', function() {
+            submenu.style.display = 'none';
+        });
+    });
+
+    // Показываем/скрываем основное меню при клике на кнопку-триггер
+    menuTrigger.addEventListener('click', function() {
+        if (nav.style.display === 'block') {
+            nav.style.display = 'none';
+        } else {
+            nav.style.display = 'block';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
